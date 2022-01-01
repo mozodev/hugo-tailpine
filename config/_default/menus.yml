@@ -1,0 +1,7 @@
+main:
+- name: About
+  url: /about/
+  weight: -110
+- name: Browse
+  url: /browse/
+  weight: -100

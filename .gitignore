@@ -1,0 +1,6 @@
+public
+node_modules
+resources
+hugo_stats.json
+.hugo_build.lock
+*.code-workspace

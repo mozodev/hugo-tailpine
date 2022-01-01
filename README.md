@@ -8,8 +8,8 @@ Hugo theme using tailwindcss and alpinejs.
 # Run server.
 $ go version
 go version go1.17 linux/amd64 (> 1.12)
-$ git clone https://github.com/team-durumi/hugo-theme-tw.git
-$ cd hugo-theme-tw/exampleSite
-$ npm i && hugo serve
+$ git clone https://github.com/mozodev/hugo-tailpine.git
+$ cd hugo-tailpine/exampleSite
+$ hugo serve
 # open http://localhost:1313
 ```
