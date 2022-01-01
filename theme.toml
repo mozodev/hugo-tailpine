@@ -1,8 +1,8 @@
-name = "Hugo Talpine"
+name = "Hugo tailpine"
 license = "MIT"
-licenselink = "https://github.com/mozodev/hugo-talpine/blob/master/LICENSE"
+licenselink = "https://github.com/mozodev/hugo-tailpine/blob/master/LICENSE"
 description = ""
-homepage = "https://hugo-talpine.netlify.app"
+homepage = "https://hugo-tailpine.netlify.app"
 tags = []
 features = []
 min_version = "0.91.2"

@@ -1,7 +1,8 @@
 {
-  "name": "hugo-talpine",
+  "name": "hugo-tailpine",
   "version": "0.0.1",
   "description": "Hugo theme using tailwindcss and alpinejs.",
   "author": "yeongtaek, Hong<mozodev@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true
 }
