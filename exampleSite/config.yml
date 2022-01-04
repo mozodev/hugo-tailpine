@@ -1,0 +1,9 @@
+title: A website
+
+languageCode: ko-kr
+defaultContentLanguage: ko
+hasCJKLanguage: true
+themesDir: ../..
+module:
+  imports:
+  - path: github.com/mozodev/hugo-tailpine
