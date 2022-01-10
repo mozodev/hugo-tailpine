@@ -1,0 +1,6 @@
+{{- $template := .Get "template" -}}
+{{- with resources.Get (printf "components/%s" $template) }}
+  {{- with (. | resources.ExecuteAsTemplate (print now.Unix) $ | minify ) }}
+    {{ .Content | safeHTML }}
+  {{ end -}}
+{{ end -}}
