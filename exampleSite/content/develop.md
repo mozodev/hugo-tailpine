@@ -36,3 +36,5 @@ assets/components => 프론트엔드 components
 
 {{< readfile file=components/base/carousel.html highlight=html >}}
 {{< loadtpl template=base/carousel.html >}}
+
+.
