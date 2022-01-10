@@ -10,6 +10,6 @@ $ go version
 go version go1.17 linux/amd64 (> 1.12)
 $ git clone https://github.com/mozodev/hugo-tailpine.git
 $ cd hugo-tailpine/exampleSite
-$ hugo serve
+$ npm start // concurrently npm:watch:[css,hugo]
 # open http://localhost:1313
 ```
