@@ -1,0 +1,1 @@
+{{- if and (ne hugo.IsProduction) (templates.Exists "partials/debugprint.html") }}{{ partial "debugprint.html" . }}{{ end -}}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ with $.Site.LanguageCode }}{{ . }}{{ else }}en-us{{ end }}">
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
@@ -13,18 +14,20 @@
   {{- template "_internal/twitter_cards.html" . -}}
   {{- range .AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">{{ end -}}
   <link rel="stylesheet" href="/assets/app.min.css" crossorigin="anonymous">
-  {{- if not hugo.IsProduction }}<style>{{ partial "debugprint.css" | safeCSS }}</style>{{ end -}}
+  {{- if not hugo.IsProduction }}{{ $debugCss := partial "debugprint.css" | safeCSS | resources.FromString "assets/debug.css" }}<link rel="stylesheet" href="{{ $debugCss.RelPermalink }}" crossorigin="anonymous">{{ end -}}
   {{- block "headCss" . }}{{ end -}}
   {{- $js := resources.Get "app.js" -}}
   {{- if $js }}{{- $js = $js | js.Build (dict "targetPath" "assets/app.js" "params" .Site.Params) -}}
   {{- if hugo.IsProduction }}{{ $js = $js | minify }}{{ end -}}
   <script src="{{ $js.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $js.Data.Integrity }}"{{ end }} defer></script>
+  {{ end }}
+  {{- block "headJs" . }}{{ end }}
+</head>
   {{ end -}}
   {{- block "headJs" . }}{{ end -}}
 <body>
   {{- block "header" . }}{{- partial "header.html" . -}}{{ end -}}
   {{- block "main" . }}{{ end -}}
   {{- block "footer" . }}{{- partial "footer.html" . -}}{{ end -}}
-  {{ partial "debugprint.html" . }}
 </body>
 </html>
