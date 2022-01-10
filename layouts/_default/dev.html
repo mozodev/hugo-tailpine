@@ -1,0 +1,11 @@
+{{ define "title" }}{{ .Title }} &ndash; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<div class="container mx-auto">
+  <article class="prose dark:prose-invert max-w-full">
+    <header>article.header<h1>{{ .Title }}</h1></header>
+    {{ .Content }}
+    <footer>article.footer</footer>
+  </article>
+</div>
+{{- partial "func/dump.html" . -}}
+{{ end }}
