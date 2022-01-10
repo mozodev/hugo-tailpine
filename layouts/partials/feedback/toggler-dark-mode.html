@@ -1,0 +1,7 @@
+<div id="toggler-dark-mode"x-data="{ isDarkMode: $persist(true) }" x-effect="html = document.documentElement;
+  isDarkMode ? html.classList.add('dark') : html.classList.remove('dark')">
+  <button @click="isDarkMode = ! isDarkMode" aria-label="밝은 화면" x-bind:aria-label="isDarkMode ? '밝은 화면' : '어두운 화면'">
+    <span x-show="isDarkMode" class="dark:text-amber-300">{{ partial "base/heroicon.html" (dict "icon" "solid/sun") }}</span>
+    <span x-show="! isDarkMode" class="text-neutral-700">{{ partial "base/heroicon.html" (dict "icon" "solid/moon") }}</span>
+  </button>
+</div>

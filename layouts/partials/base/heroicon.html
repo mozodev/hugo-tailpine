@@ -1,0 +1,4 @@
+{{- with resources.Get (printf "svg/heroicons/%s.svg" .icon) }}
+{{- $type :=  index (split $.icon "/") 0 -}}{{- $attr := cond (eq $type "outline") "stroke" "fill" -}}
+{{- .Content | safeHTML -}}<script>var svg = document.currentScript.previousElementSibling;['fill', 'stroke'].forEach(attr => { svg.removeAttribute(attr); svg.children[0].removeAttribute(attr)})
+svg.setAttribute('{{ $attr }}', 'currentColor');{{ if (eq $type "solid") }} svg.children[0].removeAttribute('stroke-width'){{ end }}</script>{{ end -}}

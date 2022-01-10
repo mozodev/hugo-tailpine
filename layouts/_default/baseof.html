@@ -23,9 +23,7 @@
   {{ end }}
   {{- block "headJs" . }}{{ end }}
 </head>
-  {{ end -}}
-  {{- block "headJs" . }}{{ end -}}
-<body>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
   {{- block "header" . }}{{- partial "header.html" . -}}{{ end -}}
   {{- block "main" . }}{{ end -}}
   {{- block "footer" . }}{{- partial "footer.html" . -}}{{ end -}}
