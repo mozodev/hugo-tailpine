@@ -1,0 +1,32 @@
+{{/* https://github.com/afulsamet/aspcore-tree-view/blob/main/aspcore-tree-view/Views/Shared/Components/TreeView/Default.cshtml */}}
+<ul class="w-full border border-gray-200 divide-y divide-gray-200 rounded-md">
+  <li class="pl-3 pr-4 py-3 flex flex-col items-center justify-between text-sm leading-5" x-data="{ IsOpen: false }">
+    <div class="flex items-center w-full user-select-none" @@click="IsOpen = !IsOpen">
+      <div class="flex-1 flex items-center">
+        {{/* leaf without children */}}
+        <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        {{/* branch with children */}}
+        <svg class="flex-shrink-0 h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+        </svg>
+        {{/* children */}}
+        <div class="w-full flex items-center justify-between">
+          <span class="ml-2 flex-1 w-0 truncate">
+            @File.Name
+          </span>
+          <span class="text-gray-400 flex-1 w-0 truncate">
+            @File.Description
+          </span>
+        </div>
+      </div>
+      <div class="ml-4 flex-shrink-0">
+        @if (!File.Childs.Count.Equals(0))
+        <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x-bind:d="IsOpen ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7'" />
+        </svg>
+      </div>
+    </div>
+  </li>
+</ul>
