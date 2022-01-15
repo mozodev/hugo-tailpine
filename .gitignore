@@ -4,3 +4,7 @@ resources
 hugo_stats.json
 .hugo_build.lock
 *.code-workspace
+
+# Local Netlify folder
+.netlify
+.env
