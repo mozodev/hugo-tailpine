@@ -2,3 +2,9 @@
   directory = "functions/"
   node_bundler = "esbuild"
   external_node_modules = ["google-spreadsheet"]
+
+[dev]
+  command = 'npm start'
+  functionsPort = 8889
+  port = 8888
+  targetPort = 1313

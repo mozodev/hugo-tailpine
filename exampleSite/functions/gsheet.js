@@ -51,7 +51,6 @@ exports.handler = async (event, context) => {
       case 'POST':
         /* parse the string body into a useable JS object */
         const data = JSON.parse(event.body);
-        data.UserIP = UserIP;
         // console.log('`POST` invoked', data);
         const addedRow = await sheet.addRow(data);
         // console.log({ addedRow });
