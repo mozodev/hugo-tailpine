@@ -1,0 +1,6 @@
+{{- $partialPath := (.Get 0) -}}
+{{ if templates.Exists ( printf "partials/%s" $partialPath ) }}
+  {{ partial $partialPath . }}
+{{ else }}
+  {{ $partialPath }}
+{{ end }}

@@ -10,6 +10,6 @@
   {{- end -}}
 {{/*  not local but virtual filesystem  */}}
 {{- else -}}
-  {{- $res := index (resources.Match (.Get "file")) 0 -}}
+  {{- $res := index (resources.Match $file) 0 -}}
   {{ highlight $res.Content (.Get "highlight") "" -}}
 {{ end }}

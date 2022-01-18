@@ -20,21 +20,33 @@ assets/components => 프론트엔드 components
 ### [Modal](https://alpinejs.dev/pattern/modal)
 
 {{< readfile file=components/base/modal.html highlight=html >}}
-{{< loadtpl template=base/modal.html >}}
+{{< component template=base/modal.html >}}
 
 ### [Dropdown](https://alpinejs.dev/pattern/dropdown)
 
 {{< readfile file=components/base/dropdown.html highlight=html >}}
-{{< loadtpl template=base/dropdown.html >}}
+{{< component template=base/dropdown.html >}}
 
 ### [Accordion](https://alpinejs.dev/pattern/accordion)
 
 {{< readfile file=components/base/accordion.html highlight=html >}}
-{{< loadtpl template=base/accordion.html >}}
+{{< component template=base/accordion.html >}}
 
 ### [Carousel](https://alpinejs.dev/pattern/carousel)
 
 {{< readfile file=components/base/carousel.html highlight=html >}}
-{{< loadtpl template=base/carousel.html >}}
+{{< component template=base/carousel.html >}}
 
-.
+## Assets (kb)
+
+{{< directoryindex path="public/assets" pathURL="/" >}}
+
+## Feedback 사용자와 치고 받기
+
+### 뉴스레터 구독
+
+{{< partial "feedback/subscribe-newsletter.html" >}}
+
+### 연락하기
+
+{{< partial "feedback/contact.html" >}}

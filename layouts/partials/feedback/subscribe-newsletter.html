@@ -1,0 +1,84 @@
+<div class="bg-gray-700 bg-no-repeat bg-cover bg-center">
+  <div class="container py-24 flex justify-center">
+    <div class="form-body text-center">
+      <h2 class="text-4xl text-white mb-8 leading-none">뉴스레터</h2>
+      <p class="lg:text-lg text-base text-white mb-8">뉴스레터를 보내드립니다.</p>
+      {{/*  <a href="/connect/newsletter/" class="underline hover:underline-offset-8 hover:bg-puple-500">이전 뉴스레터 보기</a>  */}}
+      <form id="subscribe-newsletter" class="flex h-10 items-stretch" x-data="processForm" @submit.prevent="submit">
+        <label class="hidden" for="email">이메일주소</label>
+        <input class="px-3 bg-white box-border w-80" type="email" id="email" name="email"
+          placeholder="이메일 주소: user@gmail.com"
+          x-model="emailAddress"
+          x-bind:class="{'invalid border-red-600 border-2':email.errorMessage && email.blurred}"
+          @input="start" @blur="end"
+          data-rules='["required","email"]' />
+        <button class="bg-purple-500 text-white flex-shrink-0 w-20">신청</button>
+      </form>
+      <p x-show="email.errorMessage && email.blurred" x-text="email.errorMessage" class="absolute text-red-700 error-message"></p>
+    </div>
+  </div>
+</div>
+<script>
+function processForm() {
+  return {
+    init: () => {
+      iodine.setErrorMessage("email", "이메일 주소 형식이 올바르지 않습니다.");
+      iodine.setErrorMessage("required", "입력해야 합니다.");
+    },
+    api: '{{ .Site.Params.stibee.endpointSubscribe }}/{{ .Site.Params.stibee.listIdSubscribe }}',
+    payloads: {
+      "email": "",
+      "termsOfServiceAgreed": false,
+    },
+    emailAddress: '',
+    isLoading: false,
+    email: {errorMessage:'', blurred:false},
+    start: (event) => {
+      let ele = event.target;
+      let rules = JSON.parse(ele.dataset.rules)
+      console.log(JSON.stringify(this));
+      this[ele.name].errorMessage = this.getErrorMessage(ele.value, rules);
+    },
+    end: (event) => {
+      let ele = event.target;
+      this[ele.name].blurred = true;
+      let rules = JSON.parse(ele.dataset.rules)
+      this[ele.name].errorMessage = this.getErrorMessage(ele.value, rules);
+    },
+    getErrorMessage: (value, rules) => {
+      let isValid = iodine.is(value, rules);
+      if (isValid !== true) {
+        return iodine.getErrorMessage(isValid);
+      }
+      return '';
+    },
+    submit: function (event) {
+      let inputs = [...this.$el.querySelectorAll("input[data-rules]")];
+      inputs.map((input) => {
+        if (iodine.is(input.value, JSON.parse(input.dataset.rules)) !== true) {
+          return;
+        }
+      });
+      this.requestSubscription()
+    },
+    requestSubscription: function () {
+      this.payloads.email = this.emailAddress
+      fetch(this.api, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.payloads)
+        })
+        .then(res => res.json())
+        .then(data => {
+          this.isLoading = false;
+          document.querySelector('#subscribe-newsletter').reset();
+          alert(data.message);
+        })
+        .catch(error => alert(data.message))
+    }
+  }
+}
+</script>
