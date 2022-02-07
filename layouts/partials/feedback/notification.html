@@ -1,0 +1,50 @@
+{{/*  notifications  */}}
+{{/*  $store.notifications.show(message, 'info|succss|warning|error')  */}}
+{{/*  from https://github.com/zaxwebs/tailwind-alpine/blob/main/toast.html  */}}
+<div id="notifications" x-data="items = $store.notifications.items" class="fixed right-0 bottom-0 flex items-end px-4 py-6 sm:p-6 sm:items-start">
+  <div class="w-80 flex flex-col space-y-4 items-end">
+    <template x-for="(item, index) in items" :key="item.id">
+      <div x-show="item.visible" x-init="console.log(item);"
+        @click="$store.notifications.hide(index)"
+        x-transition:enter="transition ease-in duration-200"
+        x-transition:enter-start="transform opacity-0 translate-y-2"
+        x-transition:enter-end="transform opacity-100"
+        x-transition:leave="transition ease-out duration-500"
+        x-transition:leave-start="transform translate-x-0 opacity-100"
+        x-transition:leave-end="transform translate-x-full opacity-0"
+        class="bg-gray-900 bg-gradient-to-r text-white p-3 rounded mb-3 shadow-lg items-center"
+        :class="{
+          'from-blue-500 to-blue-600': item.type === 'info',
+          'from-green-500 to-green-600': item.type === 'success',
+          'from-yellow-400 to-yellow-500': item.type === 'warning',
+          'from-red-500 to-pink-500': item.type === 'error',
+          'flex' : item.visible
+        }">
+        <span x-show="item.visible && item.type === 'info'">{{ partial "base/heroicon.html" (dict "icon" "solid/information-circle") }}</span>
+        <span x-show="item.visible && item.type === 'success'">{{ partial "base/heroicon.html" (dict "icon" "solid/check-circle") }}</span>
+        <span x-show="item.visible && item.type === 'warning'">{{ partial "base/heroicon.html" (dict "icon" "solid/exclamation") }}</span>
+        <span x-show="item.visible && item.type === 'error'">{{ partial "base/heroicon.html" (dict "icon" "solid/x-circle") }}</span>
+        <p class="ml-2" x-text="item.message" class="text-sm text-white tracking-tight"></p>
+      </div>
+    </template>
+  </div>
+</div>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.store('notifications', {
+    counter: 0,
+    items: [],
+    show(message, type = 'info') {
+      const index = this.items.length
+      let totalVisible = this.items.filter((item) => item.visible).length + 1
+      this.items.push({
+        id: this.counter++, message, type, visible: true,
+      })
+      setTimeout(() => {this.hide(index)}, 2000 * totalVisible)
+    },
+    hide(index) {
+      this.items[index].visible = false
+    }
+  })
+})
+</script>

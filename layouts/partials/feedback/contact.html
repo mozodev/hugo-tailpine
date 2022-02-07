@@ -1,35 +1,44 @@
-{{/*  https://tailwindcomponents.com/component/responsive-contact-form-2-light-mode  */}}
-{{/*  https://tailwindcomponents.com/component/responsive-contact-form-2-dark-mode  */}}
+{{/**
+  Component from:
+  - https://tailwindcomponents.com/component/responsive-contact-form-2-light-mode
+  - https://tailwindcomponents.com/component/responsive-contact-form-2-dark-mode
+  @see exampleSite/functions/gsheet.http
+**/}}
 <div class="w-full h-screen dark:bg-gray-800">
   <div class="bg-gradient-to-b from-blue-800 to-blue-600 h-96"></div>
   <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
     <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72 dark:bg-gray-900">
       <p class="text-3xl font-bold leading-7 text-center dark:text-white">연락하기</p>
-      <form action="" method="post">
+      <form x-data="contactForm" @submit.prevent="submitData" x-init="$watch('message', ()=>{ if(message && messageType){$store.notifications.show(message, messageType);} })">
+        <input type="hidden" x-model="message">
         <div class="md:flex items-center mt-12">
-          <div class="w-full md:w-1/2 flex flex-col">
+          <div class="w-full md:w-1/3 flex flex-col">
             <label class="font-semibold leading-none">성명</label>
-            <input type="text" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+            <input x-model="formData.name" type="text" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
           </div>
-          <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
-            <label class="font-semibold leading-none">전화 번호</label>
-            <input type="email" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"/>
+          <div class="w-full md:w-1/3 flex flex-col md:ml-6 md:mt-0 mt-4">
+            <label class="font-semibold leading-none">전화번호</label>
+            <input x-model="formData.tel" type="tel" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"/>
+          </div>
+          <div class="w-full md:w-1/3 flex flex-col md:ml-6 md:mt-0 mt-4">
+            <label class="font-semibold leading-none">이메일</label>
+            <input x-model="formData.email" type="email" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"/>
           </div>
         </div>
         <div class="md:flex items-center mt-8">
           <div class="w-full flex flex-col">
             <label class="font-semibold leading-none">제목</label>
-            <input type="text" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"/>
+            <input x-model="formData.subject" type="text" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"/>
           </div>
         </div>
         <div>
           <div class="w-full flex flex-col mt-8">
             <label class="font-semibold leading-none">내용</label>
-            <textarea type="text" class="h-40 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>
+            <textarea x-model="formData.message" type="text" class="h-40 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>
           </div>
         </div>
         <div class="flex items-center justify-center w-full">
-          <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
+          <button x-text="buttonLabel" :disabled="loading" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
             보내기
           </button>
         </div>
@@ -38,5 +47,44 @@
   </div>
 </div>
 <script>
-
+function contactForm() {
+  return {
+    endpoint: '/.netlify/functions/gsheet',
+    sheetTitle: 'contact',
+    formData: {
+      name: '', tel: '', email: '', subject: '', message: ''
+    },
+    message: '',
+    messageType: '',
+    loading: false,
+    buttonLabel: '보내기',
+    submitData() {
+      this.buttonLabel = '보내는 중...'
+      this.loading = true
+      this.message = ''
+      fetch(this.endpoint, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'sheet-title': this.sheetTitle
+        },
+        body: JSON.stringify(this.formData)
+      })
+      .then(response => response.json())
+      .then((response) => {
+        this.message = '곧 연락드리겠습니다.'
+        this.messageType = 'success'
+      })
+      .catch((e) => {
+        this.message = '지금은 연락을 받을 수 없습니다. 전화나 이메일로 연락해주세요.'
+        this.messageType = 'error'
+      })
+      .finally(() => {
+        this.loading = false;
+        this.buttonLabel = '보내기'
+      })
+    }
+  }
+}
 </script>
+{{ partial "feedback/notification.html" . }}

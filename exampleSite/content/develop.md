@@ -39,14 +39,4 @@ assets/components => 프론트엔드 components
 
 ## Assets (kb)
 
-{{< directoryindex path="public/assets" pathURL="/" >}}
-
-## Feedback 사용자와 치고 받기
-
-### 뉴스레터 구독
-
-{{< partial "feedback/subscribe-newsletter.html" >}}
-
-### 연락하기
-
-{{< partial "feedback/contact.html" >}}
+{{< directoryindex path="public/assets" pathURL="/assets" >}}

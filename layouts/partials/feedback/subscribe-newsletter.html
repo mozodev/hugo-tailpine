@@ -1,83 +1,83 @@
+{{/* feedback--subscribe-newsletter */}}
+{{/**
+ * Load hugo template with data
+ * Validate formData
+ * Talk to API
+ * Talk to User
+*/}}
 <div class="bg-gray-700 bg-no-repeat bg-cover bg-center">
   <div class="container py-24 flex justify-center">
     <div class="form-body text-center">
       <h2 class="text-4xl text-white mb-8 leading-none">뉴스레터</h2>
       <p class="lg:text-lg text-base text-white mb-8">뉴스레터를 보내드립니다.</p>
-      {{/*  <a href="/connect/newsletter/" class="underline hover:underline-offset-8 hover:bg-puple-500">이전 뉴스레터 보기</a>  */}}
-      <form id="subscribe-newsletter" class="flex h-10 items-stretch" x-data="processForm" @submit.prevent="submit">
-        <label class="hidden" for="email">이메일주소</label>
+      <form id="feedback--subscribe-newsletter" class="flex h-10 items-stretch" x-data="subscribeForm" @submit.prevent="submit">
+        <label class="sr-only" for="email">이메일주소</label>
         <input class="px-3 bg-white box-border w-80" type="email" id="email" name="email"
           placeholder="이메일 주소: user@gmail.com"
-          x-model="emailAddress"
-          x-bind:class="{'invalid border-red-600 border-2':email.errorMessage && email.blurred}"
-          @input="start" @blur="end"
+          x-model="email.address"
+          :class="{'invalid border-red-600 border-2' : email.errorMessage && email.blurred }"
+          @input.debounce="validate($event)"
+          @blur.debounce="let rules = JSON.parse($event.target.dataset.rules); email.blurred = true; email.errorMessage = getErrorMessage($event.target.value, rules);"
           data-rules='["required","email"]' />
-        <button class="bg-purple-500 text-white flex-shrink-0 w-20">신청</button>
+        <button x-text="buttonText" class="bg-purple-500 text-white flex-shrink-0 w-28"></button>
       </form>
       <p x-show="email.errorMessage && email.blurred" x-text="email.errorMessage" class="absolute text-red-700 error-message"></p>
     </div>
   </div>
 </div>
 <script>
-function processForm() {
+const endpoint = '{{ .Site.Params.stibee.endpointSubscribe }}/{{ .Site.Params.stibee.listIdSubscribe }}'
+var payloads = {
+  "email": "",
+  "termsOfServiceAgreed": false,
+}
+
+iodine.setErrorMessage("email", "이메일 주소 형식이 올바르지 않습니다.")
+iodine.setErrorMessage("required", "입력해야 합니다.")
+function getErrorMessage(value, rules) {
+  if (! iodine.is(value, rules)) {
+    return iodine.getErrorMessage(isValid);
+  }
+  return ''
+}
+
+function subscribeForm() {
   return {
-    init: () => {
-      iodine.setErrorMessage("email", "이메일 주소 형식이 올바르지 않습니다.");
-      iodine.setErrorMessage("required", "입력해야 합니다.");
+    buttonText: '구독 신청',
+    email: {
+      address: '',
+      errorMessage: '',
+      blurred: false
     },
-    api: '{{ .Site.Params.stibee.endpointSubscribe }}/{{ .Site.Params.stibee.listIdSubscribe }}',
-    payloads: {
-      "email": "",
-      "termsOfServiceAgreed": false,
-    },
-    emailAddress: '',
-    isLoading: false,
-    email: {errorMessage:'', blurred:false},
-    start: (event) => {
-      let ele = event.target;
-      let rules = JSON.parse(ele.dataset.rules)
-      console.log(JSON.stringify(this));
-      this[ele.name].errorMessage = this.getErrorMessage(ele.value, rules);
-    },
-    end: (event) => {
-      let ele = event.target;
-      this[ele.name].blurred = true;
-      let rules = JSON.parse(ele.dataset.rules)
-      this[ele.name].errorMessage = this.getErrorMessage(ele.value, rules);
-    },
-    getErrorMessage: (value, rules) => {
-      let isValid = iodine.is(value, rules);
-      if (isValid !== true) {
-        return iodine.getErrorMessage(isValid);
-      }
-      return '';
-    },
-    submit: function (event) {
+    submit: (event) => {
       let inputs = [...this.$el.querySelectorAll("input[data-rules]")];
       inputs.map((input) => {
-        if (iodine.is(input.value, JSON.parse(input.dataset.rules)) !== true) {
+        if (! iodine.is(input.value, JSON.parse(input.dataset.rules))) {
           return;
         }
       });
       this.requestSubscription()
     },
-    requestSubscription: function () {
-      this.payloads.email = this.emailAddress
+    requestSubscription: () => {
+      this.payloads.email = this.email.address
+      this.buttonText += ' 중...'
       fetch(this.api, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(this.payloads)
+          body: JSON.stringify(payloads)
         })
         .then(res => res.json())
         .then(data => {
-          this.isLoading = false;
-          document.querySelector('#subscribe-newsletter').reset();
-          alert(data.message);
+          document.querySelector('#feedback--subscribe-newsletter').reset();
+          console.log(data)
         })
-        .catch(error => alert(data.message))
+        .catch(error => alert(error.Message))
+        .finally(() => {
+          this.buttonText = '구독 신청'
+        })
     }
   }
 }
