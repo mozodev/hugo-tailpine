@@ -13,7 +13,7 @@ date: 2022-02-07T00:27:42+09:00
 - https://tailwindui.com/
 
 {{< rawhtml tailwind_ui >}}
-<div id="dev-column-view" x-data="{ data: data, tree: [], active: []}" class="grid overflow-hidden grid-cols-1 md:grid-cols-3 gap-2 not-prose">
+<div id="dev-column-view" x-data="{ data: data, active: []}" class="grid overflow-hidden grid-cols-1 md:grid-cols-3 gap-2 not-prose">
 	<div class="box">
     <template x-for="item in Object.keys(data)">
       <p @click="active=[item];" class="p-1 border-b-2" x-text="item"></p>
