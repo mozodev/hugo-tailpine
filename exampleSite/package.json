@@ -9,7 +9,7 @@
     "@alpinejs/collapse": "^3.7.3",
     "@alpinejs/intersect": "^3.7.3",
     "@alpinejs/persist": "^3.7.3",
-    "@alpinejs/trap": "^3.7.3",
+    "@alpinejs/focus": "^3.7.3",
     "@kingshott/iodine": "^7.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
