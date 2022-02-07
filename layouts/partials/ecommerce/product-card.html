@@ -1,0 +1,27 @@
+{{/*  ecommerce/product-card
+@params host, params
+@deps assets/netlify/functions/gsheet.js
+@use
+{{ .Scratch.Set "host" .Site.BaseURL }}{{ .Scratch.Set "params" .Site.Params }}
+{{ partial "ecommerce/product-card.html" . }}
+*/}}
+{{- with resources.GetRemote (printf "%s/.netlify/functions/gsheet/products" (.Scratch.Get "host")) }}{{ with .Err }}{{ warnf "%s" . }}{{ else }}{{ $params := $.Scratch.Get "params" }}
+{{- range $product := .Content | unmarshal }}
+{{ $product_url := (printf "%s/products/%s" $params.store.links.naverShopping $product.id) }}
+{{ $colorSchemes := $params.product.colorScheme }}
+<div class="product relative" x-data="{ image: 'first' }" @mouseover="$el.querySelector('img:first-child').classList.add('hidden');$el.querySelector('img:last-child').classList.remove('hidden');" @mouseout="$el.querySelector('img:last-child').classList.add('hidden');$el.querySelector('img:first-child').classList.remove('hidden');">
+  <div class="product-image w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+    <img src="{{ $product.thumbnail }}" alt="{{ $product.title }}" class="w-full h-full object-center object-cover lg:w-full lg:h-full border-[1px]">
+    <img src="{{ $product.thumbnail2 }}" alt="{{ $product.title }}" class="w-full h-full object-center object-cover lg:w-full lg:h-full border-[1px]">
+  </div>
+  <div class="product-info mt-4 flex justify-between">
+    <div class="product-title">
+      <h3 class="text-sm text-gray-700"><a href="{{ $product_url }}" target="_blank"><span aria-hidden="true" class="absolute inset-0"></span>{{ $product.title }}</a></h3>
+      {{ if $product.colors }}<p class="mt-1 text-sm text-gray-500">{{ partial "ecommerce/product-option-colors.html" (dict "colors" $product.colors "colorSchemes" $colorSchemes) }}</p>{{ end }}
+    </div>
+    <div class="product-price text-sm font-medium text-gray-900 text-right">
+      <span class="sale-price">{{- index $product "sale_price" | lang.FormatNumber 0 -}}</span>
+      {{- if and (isset $product "sale_price") (isset $product "price") (ne $product.price "") }}<br><del class="price text-sm text-gray-400">{{ index $product "price" | lang.FormatNumber 0 }}</del>{{ end -}}
+    </div>
+  </div>
+</div>{{ end }}{{ end -}}{{ end -}}

@@ -1,0 +1,19 @@
+{{/*  marketing/social-links
+@param .Site.Params.store.links [brand,link]
+@example
+  links:
+    instagram: https://www.instagram.com/{{ id }}/
+    youtube: https://www.youtube.com/user/{{ id }}
+    naver: https://shopping.naver.com/living/handmade/stores/{{ id }}
+    etsy: https://www.etsy.com/shop/{{ id }}
+@assets assets/svg/brand/*.svg
+@use
+{{ with .Site.Params.links }}{{- partial "marketing/social-links" . -}}{{ end }}
+*/}}
+<ul class="store-links -ml-3 md:ml-0">
+{{- range $brand, $link := . }}
+  <li class="p-1 m-2 inline"><a class="p-xs-1" href="{{ $link }}" target="_blank">
+    {{ partial "base/svg" (printf "brand/%s" $brand) }}<span class="sr-only">{{ $brand }}</span>
+  </a></li>
+{{ end -}}
+</ul>

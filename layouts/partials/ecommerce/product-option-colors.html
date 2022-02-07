@@ -1,0 +1,15 @@
+{{/*  ecommerce/product-option-colors
+@params: color, colorScheme
+@example:
+product:
+  colorScheme:
+    베이지: '#eadeb4'
+    블랙: '#000000'
+    오랜지: '#ff9800'
+@use range $product := products
+{{ partial "ecommerce/product-option-colors.html" (dict "colors" $product.colors "colorSchemes" $params.product.colorScheme) }}
+*/}}
+{{- range $color := split .colors "," }}{{ if $color }}
+<span class="w-5 h-5 mr-1 border-[1px] border-gray-400 rounded-full inline-block"
+  style="background-color: '{{ index $.colorScheme $color }}';">&nbsp;</span>
+{{ end }}{{ end -}}

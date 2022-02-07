@@ -1,0 +1,16 @@
+{{/* marketing/banner-topbar
+@param Params.banner.topbar [title|link]
+@use
+{{ with .Site.Params.banner.topbar }}{{- partial "marketing/banner-topbar" . -}}{{ end }}
+*/}}
+<div id="banner-topbar" x-data x-init="$el.nextElementSibling.classList.replace('top-0', 'top-10')"
+  class="fixed h-10 top-0 z-50 px-4 lg:px-8 flex w-full flex-col md:flex-row text-sm py-2 items-center justify-between bg-blue-600 text-white">
+  <div class="max-w-2xl lg:max-w-7xl mx-auto mb-1 md:mb-0">
+    <span class="flex p-2 rounded-lg bg-indigo-800">
+      {{ partial "base/heroicons" dict "icon" "outline/speakerphone" }}
+    </span>
+    <a class="hover:underline hover:text-indigo-100" href="{{ .link }}" target="_blank">
+      {{ .title }} >
+    </a>
+  </div>
+</div>

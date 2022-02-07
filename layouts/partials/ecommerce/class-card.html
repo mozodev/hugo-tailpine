@@ -1,0 +1,20 @@
+<section id="classes-container" class="max-w-2xl mx-auto py-16 sm:py-24 lg:max-w-7xl">
+  <div class="mt-6 grid grid-cols-2 gap-y-10 gap-x-6 md:grid-cols-3 xl:gap-x-8">
+  {{- range $product := .data.classes }}
+    <div class="product relative">
+      <div class="product-image not-prose w-full bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75">
+        <img src="{{ $product.image }}" alt="{{ $product.title }}" class="w-full h-full object-center object-cover lg:w-full lg:h-full border-[1px]">
+      </div>
+      <div class="product-info mt-4 flex justify-between">
+        <h3 class="text-sm mt-0 text-gray-700">
+          <span aria-hidden="true" class="absolute inset-0"></span>{{ $product.title }}
+        </h3>
+        <p class="text-sm font-medium text-gray-900 text-right">
+          <span class="duration">{{ $product.duration }}</span><br>
+          <span class="price">{{ $product.price }}</span>
+        </p>
+      </div>
+    </div>
+  {{ end -}}
+  </div>
+</section>
