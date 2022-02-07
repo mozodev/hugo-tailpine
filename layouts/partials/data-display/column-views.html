@@ -1,11 +1,16 @@
 {{/*  data-display/column-views
-@params .dataKey .Site.Data...
+@params .data .Site.Data.tailwind_ui
 @example
+marketing:
+  sections:
+    - hero
+    - feature
+    - call-to-action
 @links
   https://developer.apple.com/design/human-interface-guidelines/macos/windows-and-views/column-views/
   https://www.archives.go.kr/next/search/viewDescClassCategory.do
 @use
-{{ partial "data-display/column-views" dict "dataKey" "tailwind_ui" }}
+{{ partial "data-display/column-views" (dict "data" .Site.Data.tailwind_ui) }}
 */}}
 <div id="dev-column-view" x-data="{ data: data, active: []}" class="grid overflow-hidden grid-cols-1 md:grid-cols-3 gap-2 not-prose">
 	<div class="box">
