@@ -1,7 +1,6 @@
 ---
 title: "Data Display"
 date: 2022-02-07T00:27:42+09:00
-draft: true
 ---
 
 # Column views
