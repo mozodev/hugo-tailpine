@@ -10,11 +10,12 @@
     "@alpinejs/intersect": "^3.7.1",
     "@alpinejs/persist": "^3.7.1",
     "@alpinejs/trap": "^3.7.1",
+    "@kingshott/iodine": "^7.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/line-clamp": "^0.3.0",
     "@tailwindcss/typography": "^0.5.0",
-    "alpinejs": "^3.7.1",
+    "alpinejs": "^3.8.1",
     "autoprefixer": "^10.4.1",
     "concurrently": "^6.5.1",
     "cssnano": "^5.0.14",
@@ -25,10 +26,11 @@
   },
   "scripts": {
     "start": "concurrently npm:watch:*",
+    "dev": "ntl dev",
     "watch:css": "tailwindcss -c assets/_jsconfig/tailwind.config.js -i ./assets/app.css -o ./static/assets/app.min.css --watch --minify",
-    "watch:hugo": "hugo serve",
+    "watch:hugo": "hugo serve -D",
     "build:css": "tailwindcss -c assets/_jsconfig/tailwind.config.js -i ./assets/app.css -o ./static/assets/app.min.css --minify",
     "build:hugo": "hugo --gc --minify",
-    "deploy": "netlify deploy --prod"
+    "deploy": "ntl deploy --prod"
   }
 }
