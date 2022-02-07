@@ -1,0 +1,9 @@
+### products
+# GET {{ host }}/.netlify/functions/gsheet/products
+GET http://localhost:8889/.netlify/functions/gsheet/products HTTP/1.1
+content-type: application/json
+
+### slides
+GET {{ host }}/.netlify/functions/gsheet/slides
+# GET http://localhost:8889/.netlify/functions/gsheet/slides HTTP/1.1
+content-type: application/json
