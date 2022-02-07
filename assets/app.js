@@ -1,7 +1,7 @@
 import Alpine from 'alpinejs'
 import intersect from '@alpinejs/intersect'
 import persist from '@alpinejs/persist'
-import trap from '@alpinejs/trap'
+import focus from '@alpinejs/focus'
 import collapse from '@alpinejs/collapse'
 import * as params from '@params'
 import { Iodine } from '@kingshott/iodine';
@@ -14,7 +14,7 @@ window.$ = document.querySelector.bind(document)
 window.$$ = document.querySelectorAll.bind(document);
 window.iodine = iodine;
 
-[intersect, persist, trap, collapse].forEach(item => Alpine.plugin(item))
+[intersect, persist, focus, collapse].forEach(item => Alpine.plugin(item))
 Alpine.start()
 
 window.addEventListener('DOMContentLoaded', () => {
