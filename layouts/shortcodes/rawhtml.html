@@ -1,0 +1,5 @@
+<!-- raw html -->
+{{ .Inner }}
+{{- if ne (.Get 0) "" }}{{- with index .Site.Data (.Get 0) }}
+<script>const data=JSON.parse('{{ . | jsonify }}');</script>
+{{ end -}}{{ end -}}

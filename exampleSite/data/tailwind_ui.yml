@@ -1,95 +1,95 @@
 marketing:
-- sections:
-  - hero
-  - feature
-  - call-to-action
-  - pricing
-  - header
-  - faqs
-  - newsletter
-  - stats
-  - testimonial
-  - blog
-  - contact
-  - team
-  - content
-  - footer
-  - logo-clouds
-- elements:
-  - headers
-  - banners
-  - flyout-menus
-- feedback:
-  - 404
+  sections:
+    - hero
+    - feature
+    - call-to-action
+    - pricing
+    - header
+    - faqs
+    - newsletter
+    - stats
+    - testimonial
+    - blog
+    - contact
+    - team
+    - content
+    - footer
+    - logo-clouds
+  elements:
+    - headers
+    - banners
+    - flyout-menus
+  feedback:
+    - 404
 
 app:
-- shell:
-  - stacked
-  - sidebar
-  - multi-column
-- heading:
-  - page
-  - card
-  - section
-- data-display:
-  - description-list
-  - stats
-- lists:
-  - tables
-  - stacked-lists
-  - grid-lists
-  - feeds
-- forms:
-  - form-layout
-  - input-groups
-  - select-menus
-  - sign-in-up
-  - textarea
-  - radio-group
-  - checkboxes
-  - toggles
-  - action-panels
-- feedback:
-  - alerts
-  - empty-states
-- navigation:
-  - navbars
-  - pagination
-  - tabs
-  - vertical-nav
-  - sidebar-nav
-  - breadcrumb
-  - steps
-- overlays:
-  - modals
-  - slide-overs
-  - notifications
-- elements:
-  - avatars
-  - dropdowns
-  - badges
-  - buttons
-  - button-groups
-- layout:
-  - container
-  - panels
-  - list-container
-  - media-objects
-  - dividers
+  shell:
+    - stacked
+    - sidebar
+    - multi-column
+  heading:
+    - page
+    - card
+    - section
+  data-display:
+    - description-list
+    - stats
+  lists:
+    - tables
+    - stacked-lists
+    - grid-lists
+    - feeds
+  forms:
+    - form-layout
+    - input-groups
+    - select-menus
+    - sign-in-up
+    - textarea
+    - radio-group
+    - checkboxes
+    - toggles
+    - action-panels
+  feedback:
+    - alerts
+    - empty-states
+  navigation:
+    - navbars
+    - pagination
+    - tabs
+    - vertical-nav
+    - sidebar-nav
+    - breadcrumb
+    - steps
+  overlays:
+    - modals
+    - slide-overs
+    - notifications
+  elements:
+    - avatars
+    - dropdowns
+    - badges
+    - buttons
+    - button-groups
+  layout:
+    - container
+    - panels
+    - list-container
+    - media-objects
+    - dividers
 
 ecommerce:
-- components
-  - product-overviews
-  - product-lists
-  - category-preview
-  - shopping-carts
-  - category-filters
-  - product-quickviews
-  - product-features
-  - store-navigation
-  - promo-sections
-  - checkout-forms
-  - reviews
-  - order-summaries
-  - order-history
-  - incentives
+  components:
+    - product-overviews
+    - product-lists
+    - category-preview
+    - shopping-carts
+    - category-filters
+    - product-quickviews
+    - product-features
+    - store-navigation
+    - promo-sections
+    - checkout-forms
+    - reviews
+    - order-summaries
+    - order-history
+    - incentives

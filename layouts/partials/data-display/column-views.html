@@ -1,0 +1,20 @@
+{{/*  data-display/column-view
+@params map[slice] .Site.data[key]
+@example
+@links
+  https://developer.apple.com/design/human-interface-guidelines/macos/windows-and-views/column-views/
+  https://www.archives.go.kr/next/search/viewDescClassCategory.do
+*/}}
+<div x-data="data" class="grid overflow-hidden grid-cols-1 md:grid-cols-3 gap-2">
+	<div class="box">
+    <template x-for="item in Object.keys(data)">
+      <p class="p-3 border-b-2" x-text="item"></p>
+    </template>
+  </div>
+	<div class="box">
+
+  </div>
+	<div class="box">
+
+  </div>
+</div>
