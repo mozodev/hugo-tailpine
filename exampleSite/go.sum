@@ -2,6 +2,8 @@ github.com/gohugoio/hugo-mod-heroicons v0.0.0-20210121184556-d1635e3c8e62 h1:jtm
 github.com/gohugoio/hugo-mod-heroicons v0.0.0-20210121184556-d1635e3c8e62/go.mod h1:6mFNBWXSBQpSRwVrb1jozCJDgQkw+5aIu1yy17D0PW4=
 github.com/kaushalmodi/hugo-debugprint v0.0.0-20201009173613-d875fcafa822 h1:OaGE9ajMsBea9qiLeKs1ec+nYJ/1JuNYhP/X7f3a0b4=
 github.com/kaushalmodi/hugo-debugprint v0.0.0-20201009173613-d875fcafa822/go.mod h1:vusrDLlGE+4Uc1b4PgM0dI8lJCEqC1o7NjFr8WIfkaQ=
+github.com/kaushalmodi/hugo-debugprint v0.1.0 h1:L8McCoJ0WPkKSRQ0f3j4mMGubIedbOWdLs9Y4/rPGAs=
+github.com/kaushalmodi/hugo-debugprint v0.1.0/go.mod h1:vusrDLlGE+4Uc1b4PgM0dI8lJCEqC1o7NjFr8WIfkaQ=
 github.com/mozodev/hugo-tailpine v0.0.0-20220104081847-718608dadae6 h1:8JlVP2RMN9niOXrlAXoNP541HgvrokVDwnV946YrOVc=
 github.com/mozodev/hugo-tailpine v0.0.0-20220104081847-718608dadae6/go.mod h1:JVSkUa/wnH/nEreK/0/WDlFnDkHHWLjz3YPG12w1wms=
 github.com/refactoringui/heroicons v0.4.2/go.mod h1:82HsLWQga7MkEl5aK8TctxPPIBlXrsyWcVTB57uipuk=
