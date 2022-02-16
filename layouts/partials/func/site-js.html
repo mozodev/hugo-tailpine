@@ -1,0 +1,24 @@
+{{/*  base/site-js
+@desc
+  Merge source and remote js files for global.
+@params
+  .Site.Params.Assets
+@return
+  Resources[js]
+@use
+  {{ with .Site.Params.Assets }}{{ partial "base/site-js" . }}{{ end }}
+*/}}
+{{ $js := slice }}
+{{ with .Remote }}
+  {{ $remote := partial "func/assets-remote" . }}
+  {{ with $remote.js }}{{ $js = $js | append . }}{{ end }}
+{{ end }}
+{{ with .Src }}
+  {{ $src := partial "func/assets-src" . }}
+  {{ with $src.js }}{{ $js = $js | append . }}{{ end }}
+{{ end }}
+{{ $js = $js | resources.Concat "/assets/app.js" }}
+{{ if hugo.IsProduction }}
+  {{ $js = $js | js.Build (dict "minify" true ) | fingerprint }}
+{{ end }}
+{{ return $js }}

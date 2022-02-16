@@ -1,0 +1,43 @@
+{{/*  base/assets-remote
+@desc
+  Download assets from rmote and return slice of hugo resources.
+@params
+  .Site.Params.Assets.Remote
+@example
+  assets:
+    remote:
+      tailwindcss: https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp
+      alpinejs:
+        intersect: https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js
+        persist: https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js
+@use
+  {{ partial "base/assets-remote" .Site.Params.Assets.Remote }}
+@return
+  dict "css" $css "js" $js
+*/}}
+{{- $css := slice -}}{{- $js := slice -}}
+{{- range $package, $data := . }}
+  {{/*  https://discourse.gohugo.io/t/check-if-context-is-string-or-dict/31875/7  */}}
+  {{- if eq (printf "%T" $data) "string" }}
+    {{ with resources.GetRemote $data }}
+      {{ with .Err }}
+        {{ warnf "%s" . }}
+      {{ else }}
+        {{ if in .MediaType "text/css" }}{{ $css = $css | append . }}{{ end }}
+        {{ if in .MediaType "application/javascript" }}{{ $js = $js | append . }}{{ end }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{- range $name, $url := $data }}
+      {{ with resources.GetRemote $url }}
+        {{ with .Err }}
+          {{ warnf "%s" . }}
+        {{ else }}
+          {{ if in .MediaType "text/css" }}{{ $css = $css | append . }}{{ end }}
+          {{ if in .MediaType "application/javascript" }}{{ $js = $js | append . }}{{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end -}}
+  {{ end -}}
+{{ end -}}
+{{ return dict "css" $css "js" $js }}

@@ -1,0 +1,26 @@
+{{/*  base/assets-src
+@desc
+  Return source asset resources for app.
+@params
+  .Site.Params.Assets.Src
+@use
+  {{ with .Site.Params.Assets.Src }}{{ partial "base/assets-src" . }}{{ end }}
+@return
+  dict "css" $css "js" $js
+*/}}
+{{ $css := slice }}{{ $js := slice }}
+{{ range $type, $asset := . }}
+  {{ with resources.Get $asset }}
+    {{ if in .MediaType "text/css" }}
+      {{ if eq $type "scss" }}
+        {{ $css = $css | append ( . | toCSS ) }}
+      {{ else }}
+        {{ $css = $css | append ( . | resources.PostCSS ) }}
+      {{ end }}
+    {{ end }}
+    {{ if in .MediaType "application/javascript" }}
+      {{ $js = $js | append ( . |  js.Build ) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return dict "css" $css "js" $js }}

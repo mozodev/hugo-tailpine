@@ -2,6 +2,11 @@
 title: "development"
 date: 2022-01-10T15:54:12+09:00
 layout: dev
+assets:
+  remote:
+    simple.css: https://unpkg.com/simple.css/dist/simple.min.css
+    smoothscroll: https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.js
+    smoothscroll: https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.js
 ---
 
 휴고 `asset` 디렉토리에 `components` 디렉토리를 만들고 프론트엔드 컴포넌트들을 쌓아본다.    

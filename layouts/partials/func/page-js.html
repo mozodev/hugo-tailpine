@@ -1,0 +1,32 @@
+{{/*  base/page-js
+@desc
+  Merge source and remote js files from page frontmatter page.
+@params
+  .Page
+@return
+  Resources[js]
+@use
+  {{ with .Page }}{{ partial "base/page-js" . }}{{ end }}
+*/}}
+{{ $js := slice }}
+{{ with .Params.Assets.Remote }}
+  {{ $remote := partial "func/assets-remote" . }}
+  {{ with $remote.js }}{{ $js = $js | append . }}{{ end }}
+{{ end }}
+{{ with .Params.Assets.Src }}
+  {{ $src := partial "func/assets-src" . }}
+  {{ with $src.js }}{{ $js = $js | append ( . | js.Build ) }}{{ end }}
+{{ end }}
+
+{{ $target := "/assets/page.js" }}
+{{ with .File }}
+  {{ $target = (printf "/assets/page.%s.js" .UniqueID) | urlize }}
+{{ end }}
+
+{{ if gt (len $js) 0 }}
+  {{ $js = $js | resources.Concat $target }}
+{{ end }}
+{{ if hugo.IsProduction }}
+  {{ $js = $js | js.Build (dict "targetPath" $target "minify" true ) | fingerprint }}
+{{ end }}
+{{ return $js }}

@@ -1,0 +1,25 @@
+{{/*  base/page-css
+@desc
+  Merge source and remote css files from page frontmatter.
+@params
+  .Page
+@return
+  Resources[css]
+@use
+  {{ with .Page }}{{ partial "base/page-css" . }}{{ end }}
+*/}}
+{{ $css := slice }}
+{{ with .Params.Assets.Remote }}
+  {{ $remote := partial "func/assets-remote" . }}
+  {{ with $remote.css }}{{ $css = $css | append . }}{{ end }}
+{{ end }}
+{{ with .Params.Assets.Src }}
+  {{ $src := partial "func/assets-src" . }}
+  {{ with $src.css }}{{ $css = $css | append . }}{{ end }}
+{{ end }}
+{{ $target := (printf "/assets/page-%s.css" .File.UniqueID) | urlize }}
+{{ $css = $css | resources.Concat $target }}
+{{ if hugo.IsProduction }}
+  {{ $css = $css | minify | fingerprint }}
+{{ end }}
+{{ return $css }}

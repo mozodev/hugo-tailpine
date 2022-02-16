@@ -1,0 +1,26 @@
+{{/*  base/site-css
+@desc
+  Merge source and remote css files globally.
+@params
+  .Site.Params.Assets
+@return
+  Resources[css]
+@use
+  {{ with .Site.Params.Assets }}{{ $css := partial "base/site-css" . }}{{ end }}
+*/}}
+{{ $css := slice }}
+{{ with .Remote }}
+  {{ $remote := partial "func/assets-remote" . }}
+  {{ with $remote.css }}{{ $css = $css | append . }}{{ end }}
+{{ end }}
+{{ with .Src }}
+  {{ $src := partial "func/assets-src" . }}
+  {{ with $src.css }}
+    {{ $css = $css | append . }}
+  {{ end }}
+{{ end }}
+{{ $css = $css | resources.Concat "/assets/app.css" }}
+{{ if hugo.IsProduction }}
+  {{ $css = $css | minify | fingerprint }}
+{{ end }}
+{{ return $css }}

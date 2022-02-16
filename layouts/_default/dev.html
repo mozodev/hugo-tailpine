@@ -7,5 +7,12 @@
     <footer>article.footer</footer>
   </article>
 </div>
-{{- partial "func/dump.html" . -}}
+{{- with (partial "func/page-js" .) }}
+  {{/*  {{ printf "%#v" . }}  */}}
+  {{/*  {{ partial "func/dump" . }}  */}}
+  <script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>
+{{ end -}}
 {{ end }}
+{{ define "footer"  }}
+  {{- partial "footer.html" . -}}
+{{ end -}}

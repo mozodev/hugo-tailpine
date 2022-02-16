@@ -8,3 +8,11 @@
   </article>
 </div>
 {{ end }}
+{{ define "footer"  }}
+  {{- partial "footer.html" . -}}
+  {{- with . }}
+    {{- with (partial "func/page-js" .) }}
+      <script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>
+    {{ end -}}
+  {{ end -}}
+{{ end -}}

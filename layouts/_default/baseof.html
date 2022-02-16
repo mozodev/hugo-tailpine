@@ -13,19 +13,21 @@
   {{- template "_internal/schema.html" . -}}
   {{- template "_internal/twitter_cards.html" . -}}
   {{- range .AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">{{ end -}}
-  <link rel="stylesheet" href="/assets/app.min.css" crossorigin="anonymous">
   {{- if not hugo.IsProduction }}{{ $debugCss := partial "debugprint.css" | safeCSS | resources.FromString "assets/debug.css" }}<link rel="stylesheet" href="{{ $debugCss.RelPermalink }}" crossorigin="anonymous">{{ end -}}
-  {{- block "headCss" . }}{{ end -}}
-  {{- $js := resources.Get "app.js" -}}
-  {{- if $js }}{{- $js = $js | js.Build (dict "targetPath" "assets/app.js" "params" .Site.Params) -}}
-  {{- if hugo.IsProduction }}{{ $js = $js | minify }}{{ end -}}
-  <script src="{{ $js.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $js.Data.Integrity }}"{{ end }} defer></script>
-  {{ end }}
-  {{- block "headJs" . }}{{ end }}
+  {{- block "siteCss" . }}{{ with .Site.Params.Assets }}{{- with (partial "func/site-css" .) }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous">
+  {{ end -}}{{ end }}{{ end -}}
 </head>
 <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
   {{- block "header" . }}{{- partial "header.html" . -}}{{ end -}}
   {{- block "main" . }}{{ end -}}
-  {{- block "footer" . }}{{- partial "footer.html" . -}}{{ end -}}
+  {{- block "footer" . }}
+    {{- partial "footer.html" . -}}
+  {{ end -}}
+  {{- with .Site.Params.Assets }}
+    {{- with (partial "func/site-js" .) }}
+      <script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>
+    {{ end -}}
+  {{ end -}}
 </body>
 </html>
