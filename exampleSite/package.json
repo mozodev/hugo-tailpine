@@ -7,9 +7,9 @@
   "private": true,
   "devDependencies": {
     "@alpinejs/collapse": "^3.7.3",
+    "@alpinejs/focus": "^3.7.3",
     "@alpinejs/intersect": "^3.7.3",
     "@alpinejs/persist": "^3.7.3",
-    "@alpinejs/focus": "^3.7.3",
     "@kingshott/iodine": "^7.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
@@ -26,14 +26,11 @@
   },
   "scripts": {
     "start": "concurrently npm:watch:*",
-    "watch:css": "tailwindcss -c ../assets/_jsconfig/tailwind.config.js -i ../assets/app.css -o ../static/assets/app.min.css --watch --minify",
+    "dev": "concurrently npm:watch:*",
+    "watch:tailwindcss": "tailwindcss -c ../assets/_jsconfig/tailwind.config.js -i ../assets/app.css -o ../static/assets/app.min.css --watch --minify",
     "watch:hugo": "hugo serve -D",
-    "build:css": "tailwindcss -c ../assets/_jsconfig/tailwind.config.js -i ../assets/app.css -o ../static/assets/app.min.css --minify",
+    "build:tailwindcss": "tailwindcss -c ../assets/_jsconfig/tailwind.config.js -i ../assets/app.css -o ../static/assets/app.min.css --minify",
     "build:hugo": "hugo --gc --minify",
-    "dev": "ntl dev",
     "deploy": "ntl build && ntl deploy --prod --message='Deploy from cli.'"
-  },
-  "dependencies": {
-    "google-spreadsheet": "^3.2.0"
   }
 }

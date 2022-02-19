@@ -1,0 +1,13 @@
+{
+  "name": "og",
+  "version": "1.0.0",
+  "description": "Generate open graph image",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@netlify/functions": "^1.0.0",
+    "chrome-aws-lambda": "^10.1.0",
+    "puppeteer-core": "^13.3.2"
+  }
+}

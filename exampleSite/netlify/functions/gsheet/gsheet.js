@@ -8,7 +8,7 @@
  * GOOGLE_PRIVATE_KEY=
  * GOOGLE_SPREADSHEET_ID_FROM_URL=
  *
- * from https://github.com/sw-yx/netlify-google-spreadsheet-demo
+ * @from https://github.com/sw-yx/netlify-google-spreadsheet-demo
  */
 
 const { GoogleSpreadsheet } = require('google-spreadsheet');

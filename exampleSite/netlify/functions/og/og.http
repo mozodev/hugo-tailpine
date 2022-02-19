@@ -1,0 +1,15 @@
+### redirect
+GET http://localhost:8888/og/posts/1.png HTTP/1.1
+content-type: application/json
+
+### plain
+GET http://localhost:8888/.netlify/functions/og/posts/1.png HTTP/1.1
+content-type: application/json
+
+### post json
+GET http://localhost:8888/posts/1/index.json HTTP/1.1
+content-type: application/json
+
+### og html
+GET http://localhost:8888/posts/1/og.html HTTP/1.1
+content-type: application/json
