@@ -1,0 +1,8 @@
+{{-
+dict
+  "title" .Title
+  "date" .Date
+  "type" .Type
+  "permalink" .RelPermalink
+| jsonify
+-}}

@@ -1,0 +1,27 @@
+{{/* layouts/_default/single.og.html
+@links:
+- https://tailwind-cards.netlify.app/
+- https://github.com/BrettJay/ogp-template
+- https://opengraphr.com/open-graph-tailwindcss-snippets
+*/}}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }}</title>
+  <link rel="stylesheet" href="/assets/app.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSans.css" crossorigin="anonymous">
+  <style>html > * { font-family: GmarketSans; }</style>
+</head>
+<body>
+  <article class="py-20 px-12 transform bg-red-100 duration-500 hover:-translate-y-2">
+    <img class="ml-auto w-32 rounded-full" src="https://github.com/team-durumi.png?v=4" alt="{{ .Title }}">
+    <h1 class="font-extrabold text-6xl mt-28 mb-10 text-gray-800">01.{{ .Title }}</h1>
+    <p class="text-sm leading-relaxed text-gray-700">
+      {{ .Content }}
+    </p>
+  </article>
+</body>
+</html>

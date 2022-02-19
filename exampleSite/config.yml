@@ -10,3 +10,15 @@ module:
   - path: github.com/gohugoio/hugo-mod-heroicons
   - path: github.com/mozodev/hugo-tailpine
   replacements: "github.com/mozodev/hugo-tailpine -> ../.."
+
+outputFormats:
+  og:
+    baseName: og
+    isHTML: true
+    mediaType: text/html
+
+outputs:
+  page:
+  - html
+  - json
+  - og
