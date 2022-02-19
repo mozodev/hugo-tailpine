@@ -10,4 +10,6 @@ github.com/mozodev/hugo-tailpine v0.0.0-20220216135314-cf90b31c49a0 h1:Ozs28VQf0
 github.com/mozodev/hugo-tailpine v0.0.0-20220216135314-cf90b31c49a0/go.mod h1:JVSkUa/wnH/nEreK/0/WDlFnDkHHWLjz3YPG12w1wms=
 github.com/mozodev/hugo-tailpine v0.0.0-20220216135753-4871f168bc24 h1:/URnwhXOtQVS0TaZJbLaA1eeX1ZQAQheGfAM6N1oxLg=
 github.com/mozodev/hugo-tailpine v0.0.0-20220216135753-4871f168bc24/go.mod h1:JVSkUa/wnH/nEreK/0/WDlFnDkHHWLjz3YPG12w1wms=
+github.com/mozodev/hugo-tailpine v0.0.0-20220219144055-d74b51d2f468 h1:Acp2oMYOnNfVl0lNwNcbCYlWLthr0mgGZRw4oPnRNOI=
+github.com/mozodev/hugo-tailpine v0.0.0-20220219144055-d74b51d2f468/go.mod h1:JVSkUa/wnH/nEreK/0/WDlFnDkHHWLjz3YPG12w1wms=
 github.com/refactoringui/heroicons v0.4.2/go.mod h1:82HsLWQga7MkEl5aK8TctxPPIBlXrsyWcVTB57uipuk=
