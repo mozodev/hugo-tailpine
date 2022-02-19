@@ -11,3 +11,6 @@
   port = 8888
   targetPort = 1313
   publish = "public"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
