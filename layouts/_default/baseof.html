@@ -8,6 +8,7 @@
   <title>{{ block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
   {{- if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production") }}<meta name="robots" content="index, follow">{{ else }}<meta name="robots" content="noindex, nofollow">{{ end -}}
+  {{/*  https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates  */}}
   {{- template "_internal/google_analytics.html" . -}}
   {{- template "_internal/opengraph.html" . -}}
   {{- template "_internal/schema.html" . -}}
@@ -20,14 +21,11 @@
 </head>
 <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
   {{- block "header" . }}{{- partial "header.html" . -}}{{ end -}}
-  {{- block "main" . }}{{ end -}}
+  {{- block "main" . }}{{ .Content }}{{ end -}}
   {{- block "footer" . }}
     {{- partial "footer.html" . -}}
-  {{ end -}}
-  {{- with .Site.Params.Assets }}
-    {{- with (partial "func/site-js" .) }}
-      <script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>
-    {{ end -}}
+    {{- with .Site.Params.Assets }}{{- with (partial "func/site-js" .) }}<script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>{{ end -}}{{ end -}}
+    {{- with (partial "func/page-js" .) }}<script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>{{ end -}}
   {{ end -}}
 </body>
 </html>
