@@ -26,6 +26,7 @@
     {{- partial "footer.html" . -}}
     {{- with .Site.Params.Assets }}{{- with (partial "func/site-js" .) }}<script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>{{ end -}}{{ end -}}
     {{- with (partial "func/page-js" .) }}<script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>{{ end -}}
+    {{ partial "base/og.html" . }}
   {{ end -}}
 </body>
 </html>

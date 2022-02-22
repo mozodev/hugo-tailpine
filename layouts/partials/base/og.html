@@ -1,0 +1,15 @@
+{{ $ogImgURL := "" }}
+{{ $path := path.Clean .RelPermalink }}
+{{ $host := cond (and (not hugo.IsProduction) (eq "0.92.2" (getenv "HUGO_VERSION"))) "http://localhost:8888" .Site.BaseURL }}
+{{ $functionURL := printf "%s/og%s.png" $host $path }}
+{{ if ne $path "/" }}
+  {{ with resources.GetRemote $functionURL }}
+    {{ with .Err }}
+      {{ warnf "%s" . }}
+    {{ else }}
+      {{ $img := .Content | resources.FromString (printf "%s/cover.png" $path) }}
+      {{ $ogImgURL = $img.RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $ogImgURL }}
