@@ -1,0 +1,9 @@
+hugoVersion:
+  extended: true
+  min: "0.92.0"
+
+imports:
+- path: github.com/kaushalmodi/hugo-debugprint
+- path: github.com/gohugoio/hugo-mod-heroicons
+- path: github.com/mozodev/hugo-tailpine
+replacements: "github.com/mozodev/hugo-tailpine -> ../.."

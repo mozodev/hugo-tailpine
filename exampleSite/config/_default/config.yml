@@ -1,14 +1,9 @@
 title: A website
 
+baseURL: https://hugo-tailpine-dev.netlify.app
 languageCode: ko-kr
 defaultContentLanguage: ko
 hasCJKLanguage: true
-
-module:
-  imports:
-  - path: github.com/kaushalmodi/hugo-debugprint
-  - path: github.com/gohugoio/hugo-mod-heroicons
-  - path: github.com/mozodev/hugo-tailpine
 
 outputFormats:
   og:
