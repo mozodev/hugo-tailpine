@@ -1,7 +1,7 @@
 /**
- * Google spreadsheet
+ * Deploy (protected by DEPLOY_SECRET)
  *
- * POST /.netlify/functions/gsheet
+ * POST /.netlify/functions/deploy
  *
  * @see env-vars
  * DEPLOY_URL
