@@ -26,7 +26,7 @@
 {{ if gt (len $js) 0 }}
   {{ $js = $js | resources.Concat $target }}
 {{ end }}
-{{ if hugo.IsProduction }}
+{{ if and hugo.IsProduction $js }}
   {{ $js = $js | js.Build (dict "targetPath" $target "minify" true ) | fingerprint }}
 {{ end }}
 {{ return $js }}
