@@ -1,0 +1,10 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "description": "deploy",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "node-fetch": "^3"
+  }
+}
