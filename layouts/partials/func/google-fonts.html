@@ -1,0 +1,8 @@
+{{/*  func/google-fonts
+@use {{ partial "func/google-fonts" .Site.Params }}
+@see https://csswizardry.com/2020/05/the-fastest-google-fonts/
+*/}}
+{{- with .GoogleFonts }}<link rel="preconnect" href="https://fonts.gstatic.com"  crossorigin="anonymous" />{{- range . }}
+<link rel="preload" as="style" href="{{ . }}" />
+<link rel="stylesheet" href="{{ . }}" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="{{ . }}" /></noscript>{{ end -}}{{ end -}}

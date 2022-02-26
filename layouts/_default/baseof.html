@@ -15,6 +15,7 @@
   {{- template "_internal/twitter_cards.html" . -}}
   {{- range .AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">{{ end -}}
   {{- if not hugo.IsProduction }}{{ $debugCss := partial "debugprint.css" | safeCSS | resources.FromString "assets/debug.css" }}<link rel="stylesheet" href="{{ $debugCss.RelPermalink }}" crossorigin="anonymous">{{ end -}}
+  {{- partial "func/google-fonts" .Site.Params -}}
   {{- block "siteCss" . }}{{ with .Site.Params.Assets }}{{- with (partial "func/site-css" .) }}
   <link rel="stylesheet" href="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous">
   {{ end -}}{{ end }}{{ end -}}

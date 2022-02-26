@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+@layer base {
+  h1, h2, h3, h4, h5 {
+    @apply font-heading;
+  }
+}
