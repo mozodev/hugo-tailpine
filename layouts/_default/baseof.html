@@ -19,6 +19,9 @@
   {{- block "siteCss" . }}{{ with .Site.Params.Assets }}{{- with (partial "func/site-css" .) }}
   <link rel="stylesheet" href="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous">
   {{ end -}}{{ end }}{{ end -}}
+  {{ $styles := resources.Get "app.css" | postCSS (dict "inlineImports" true) | resources.ExecuteAsTemplate (printf "tailwind.dev.%v.css" now.UnixMilli) . }}
+  {{- if hugo.IsProduction }}{{ $styles = $styles | minify | resources.PostProcess }}{{ end -}}
+  <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
 </head>
 <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
   {{- block "header" . }}{{- partial "header.html" . -}}{{ end -}}

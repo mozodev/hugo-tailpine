@@ -3,3 +3,6 @@ title: A website
 languageCode: ko-kr
 defaultContentLanguage: ko
 hasCJKLanguage: true
+
+build:
+  writeStats: true

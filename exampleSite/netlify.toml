@@ -7,7 +7,7 @@
   to = "/.netlify/functions/og/:splat"
 
 [dev]
-  command = "yarn start"
+  command = "hugo server -D"
   port = 8888
   targetPort = 1313
   publish = "public"
