@@ -1,0 +1,8 @@
+@deploySecret = {{$dotenv DEPLOY_SECRET}}
+@deployUrl = {{$dotenv DEPLOY_URL}}
+
+### deploy
+http://localhost:8888/.netlify/functions/deploy?secret={{deploySecret}}
+
+### direct depoly
+POST {{deployUrl}}

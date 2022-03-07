@@ -1,3 +1,4 @@
+### add new row to sheet
 POST http://localhost:8888/.netlify/functions/gsheet HTTP/1.1
 content-type: application/json
 sheet-title: 2022
@@ -9,3 +10,7 @@ sheet-title: 2022
   "created_at": "created_at2222",
   "body": "body2222"
 }
+
+### get rows
+GET http://localhost:8888/.netlify/functions/gsheet/2022 HTTP/1.1
+content-type: application/json

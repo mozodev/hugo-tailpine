@@ -1,0 +1,7 @@
+### list images
+@accountId = {{$dotenv CLOUDFLARE_ACCOUNT_ID}}
+@apiToken = {{$dotenv CLOUDFLARE_API_TOKEN_IMAGE}}
+
+GET https://api.cloudflare.com/client/v4/accounts/{{accountId}}/images/v1?page=1&per_page=50 HTTP/1.1
+Authorization: Bearer {{apiToken}}
+Content-Type: application/json

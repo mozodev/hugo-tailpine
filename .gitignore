@@ -8,4 +8,3 @@ hugo_stats.json
 # Local Netlify folder
 .netlify
 .env
-exampleSite/netlify/functions/deploy/deploy.http
