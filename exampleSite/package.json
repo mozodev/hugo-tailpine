@@ -10,7 +10,8 @@
     "cssnano": "^5.0.14",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
-    "tailwindcss": "^3"
+    "tailwindcss": "^3",
+    "workbox-recipes": "^6.5.1"
   },
   "scripts": {
     "deploy": "ntl build && ntl deploy --prod --message='Deploy from cli.'"

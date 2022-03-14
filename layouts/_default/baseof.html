@@ -30,7 +30,17 @@
     {{- partial "footer.html" . -}}
     {{- with .Site.Params.Assets }}{{- with (partial "func/site-js" .) }}<script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>{{ end -}}{{ end -}}
     {{- with (partial "func/page-js" .) }}<script type="text/javascript" src="{{ .RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ .Data.Integrity }}"{{ end }} crossorigin="anonymous" defer></script>{{ end -}}
-    {{- if hugo.IsProduction }}{{ partial "base/og.html" . }}{{ end -}}
+    {{- if hugo.IsProduction }}{{- partial "base/og.html" . -}}
+      {{- with resources.Get "sw.js" }}{{ $sw := . |  js.Build }}
+      <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('{{ $sw.RelPermalink }}');
+          });
+        }
+      </script>
+      {{ end -}}
+    {{ end -}}
   {{ end -}}
 </body>
 </html>
