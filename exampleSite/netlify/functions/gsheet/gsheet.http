@@ -1,3 +1,4 @@
+# https://hugo-tailpine-dev.netlify.app/.netlify/functions/gsheet
 ### add new row to sheet
 POST http://localhost:8888/.netlify/functions/gsheet HTTP/1.1
 content-type: application/json
@@ -11,6 +12,10 @@ sheet-title: 2022
   "body": "body2222"
 }
 
-### get rows
+### get rows -- 2022
 GET http://localhost:8888/.netlify/functions/gsheet/2022 HTTP/1.1
+content-type: application/json
+
+### get rows -- short-links
+GET http://localhost:8888/.netlify/functions/gsheet/short-links HTTP/1.1
 content-type: application/json
