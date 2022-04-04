@@ -50,9 +50,30 @@ exports.verifySignature = (input) => {
   return true
 }
 
-const operationsDoc = `query ExampleQuery @netlify(doc: "An example query to start with.") {
-  __typename
-}`
+const operationsDoc = `query GetGithubCommitCountsByRepo($from: GitHubDateTime, $to: GitHubDateTime) @netlify(id: """51a03183-e1d7-480b-868f-971a7f7a0a52""", doc: """An example query to start with.""") {
+  me {
+    github {
+      contributionsCollection(from: $from, to: $to) {
+        commitContributionsByRepository {
+          contributions(first: 100) {
+            edges {
+              node {
+                commitCount
+                isRestricted
+                occurredAt
+                repository {
+                  resourcePath
+                }
+              }
+              cursor
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
 
 const httpFetch = (siteId, options) => {
       const reqBody = options.body || null
@@ -155,13 +176,13 @@ exports.verifyRequestSignature = (request, options) => {
   return verifySignature({ secret, signature, body: body || '' })
 }
 
-exports.fetchExampleQuery = (
+exports.fetchGetGithubCommitCountsByRepo = (
       variables,
       options
     ) => {
       return fetchNetlifyGraph({
         query: operationsDoc,
-        operationName: "ExampleQuery",
+        operationName: "GetGithubCommitCountsByRepo",
         variables: variables,
         options: options || {},
       });
@@ -175,7 +196,7 @@ const functions = {
   /**
   * An example query to start with.
   */
-  fetchExampleQuery: exports.fetchExampleQuery
+  fetchGetGithubCommitCountsByRepo: exports.fetchGetGithubCommitCountsByRepo
 }
 
 exports.default = functions

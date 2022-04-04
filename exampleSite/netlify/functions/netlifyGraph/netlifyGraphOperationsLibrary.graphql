@@ -1,0 +1,23 @@
+query GetGithubCommitCountsByRepo($from: GitHubDateTime, $to: GitHubDateTime) @netlify(id: """51a03183-e1d7-480b-868f-971a7f7a0a52""", doc: """An example query to start with.""") {
+  me {
+    github {
+      contributionsCollection(from: $from, to: $to) {
+        commitContributionsByRepository {
+          contributions(first: 100) {
+            edges {
+              node {
+                commitCount
+                isRestricted
+                occurredAt
+                repository {
+                  resourcePath
+                }
+              }
+              cursor
+            }
+          }
+        }
+      }
+    }
+  }
+}
